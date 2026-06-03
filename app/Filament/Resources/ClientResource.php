@@ -18,7 +18,7 @@ class ClientResource extends Resource
     protected static ?string $model = Client::class;
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
     protected static ?string $navigationGroup = 'Business Operations';
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 1;
     protected static ?string $recordTitleAttribute = 'name';
 
     // ── Permissions ───────────────────────────────────────────────────
@@ -188,6 +188,143 @@ class ClientResource extends Resource
                     ->maxLength(15)
                     ->placeholder('22BBBBB0000B1Z5'),
             ]),
+
+            Forms\Components\Section::make('Document Uploads')
+                ->description('Upload files (PDF/Images) or paste text content.')
+                ->icon('heroicon-o-paper-clip')
+                ->columns(2)
+                ->collapsible()
+                ->schema([
+                    // PAN Document
+                    Forms\Components\Group::make()->schema([
+                        Forms\Components\ToggleButtons::make('pan_document_mode')
+                            ->label('PAN Document Input')
+                            ->options(['file' => 'Upload File', 'text' => 'Enter Text'])
+                            ->icons(['file' => 'heroicon-o-paper-clip', 'text' => 'heroicon-o-pencil-square'])
+                            ->colors(['file' => 'primary', 'text' => 'info'])
+                            ->default('file')
+                            ->inline()
+                            ->live(),
+                        Forms\Components\FileUpload::make('pan_document_path')
+                            ->label('PAN Document File')
+                            ->disk('public')
+                            ->directory('client-docs/pan') // Updated to client-docs
+                            ->acceptedFileTypes(['application/pdf', 'image/*'])
+                            ->maxSize(5120)
+                            ->downloadable()
+                            ->openable()
+                            ->visible(fn(Get $get) => $get('pan_document_mode') === 'file'),
+                        Forms\Components\Textarea::make('pan_document_text')
+                            ->label('PAN Document Content')
+                            ->placeholder('Type or paste PAN details here.')
+                            ->rows(3)
+                            ->visible(fn(Get $get) => $get('pan_document_mode') === 'text'),
+                    ])->columnSpan(1),
+
+                    // GST Certificate
+                    Forms\Components\Group::make()->schema([
+                        Forms\Components\ToggleButtons::make('gst_certificate_mode')
+                            ->label('GST Certificate Input')
+                            ->options(['file' => 'Upload File', 'text' => 'Enter Text'])
+                            ->icons(['file' => 'heroicon-o-paper-clip', 'text' => 'heroicon-o-pencil-square'])
+                            ->colors(['file' => 'primary', 'text' => 'info'])
+                            ->default('file')
+                            ->inline()
+                            ->live(),
+                        Forms\Components\FileUpload::make('gst_certificate_path')
+                            ->label('GST Certificate File')
+                            ->disk('public')
+                            ->directory('client-docs/gst') // Updated to client-docs
+                            ->acceptedFileTypes(['application/pdf', 'image/*'])
+                            ->maxSize(5120)
+                            ->downloadable()
+                            ->openable()
+                            ->visible(fn(Get $get) => $get('gst_certificate_mode') === 'file'),
+                        Forms\Components\Textarea::make('gst_certificate_text')
+                            ->label('GST Certificate Content')
+                            ->placeholder('Type or paste GST details here.')
+                            ->rows(3)
+                            ->visible(fn(Get $get) => $get('gst_certificate_mode') === 'text'),
+                    ])->columnSpan(1),
+
+                    // User Attachment 1
+                    Forms\Components\Group::make()->schema([
+                        Forms\Components\ToggleButtons::make('doc_user_attachment_1_mode')
+                            ->label('User Attachment 1 Input')
+                            ->options(['file' => 'Upload File', 'text' => 'Enter Text'])
+                            ->icons(['file' => 'heroicon-o-paper-clip', 'text' => 'heroicon-o-pencil-square'])
+                            ->colors(['file' => 'primary', 'text' => 'info'])
+                            ->default('file')
+                            ->inline()
+                            ->live(),
+                        Forms\Components\FileUpload::make('doc_user_attachment_1_path')
+                            ->label('User Attachment 1 File')
+                            ->disk('public')
+                            ->directory('client-docs/attachments') // Updated to client-docs
+                            ->acceptedFileTypes(['application/pdf', 'image/*'])
+                            ->maxSize(5120)
+                            ->downloadable()
+                            ->openable()
+                            ->visible(fn(Get $get) => $get('doc_user_attachment_1_mode') === 'file'),
+                        Forms\Components\Textarea::make('doc_user_attachment_1_text')
+                            ->label('User Attachment 1 Content')
+                            ->placeholder('Type or paste details here.')
+                            ->rows(3)
+                            ->visible(fn(Get $get) => $get('doc_user_attachment_1_mode') === 'text'),
+                    ])->columnSpan(1),
+
+                    // User Attachment 2
+                    Forms\Components\Group::make()->schema([
+                        Forms\Components\ToggleButtons::make('doc_user_attachment_2_mode')
+                            ->label('User Attachment 2 Input')
+                            ->options(['file' => 'Upload File', 'text' => 'Enter Text'])
+                            ->icons(['file' => 'heroicon-o-paper-clip', 'text' => 'heroicon-o-pencil-square'])
+                            ->colors(['file' => 'primary', 'text' => 'info'])
+                            ->default('file')
+                            ->inline()
+                            ->live(),
+                        Forms\Components\FileUpload::make('doc_user_attachment_2_path')
+                            ->label('User Attachment 2 File')
+                            ->disk('public')
+                            ->directory('client-docs/attachments') // Updated to client-docs
+                            ->acceptedFileTypes(['application/pdf', 'image/*'])
+                            ->maxSize(5120)
+                            ->downloadable()
+                            ->openable()
+                            ->visible(fn(Get $get) => $get('doc_user_attachment_2_mode') === 'file'),
+                        Forms\Components\Textarea::make('doc_user_attachment_2_text')
+                            ->label('User Attachment 2 Content')
+                            ->placeholder('Type or paste details here.')
+                            ->rows(3)
+                            ->visible(fn(Get $get) => $get('doc_user_attachment_2_mode') === 'text'),
+                    ])->columnSpan(1),
+
+                    // User Attachment 3
+                    Forms\Components\Group::make()->schema([
+                        Forms\Components\ToggleButtons::make('doc_user_attachment_3_mode')
+                            ->label('User Attachment 3 Input')
+                            ->options(['file' => 'Upload File', 'text' => 'Enter Text'])
+                            ->icons(['file' => 'heroicon-o-paper-clip', 'text' => 'heroicon-o-pencil-square'])
+                            ->colors(['file' => 'primary', 'text' => 'info'])
+                            ->default('file')
+                            ->inline()
+                            ->live(),
+                        Forms\Components\FileUpload::make('doc_user_attachment_3_path')
+                            ->label('User Attachment 3 File')
+                            ->disk('public')
+                            ->directory('client-docs/attachments') // Updated to client-docs
+                            ->acceptedFileTypes(['application/pdf', 'image/*'])
+                            ->maxSize(5120)
+                            ->downloadable()
+                            ->openable()
+                            ->visible(fn(Get $get) => $get('doc_user_attachment_3_mode') === 'file'),
+                        Forms\Components\Textarea::make('doc_user_attachment_3_text')
+                            ->label('User Attachment 3 Content')
+                            ->placeholder('Type or paste details here.')
+                            ->rows(3)
+                            ->visible(fn(Get $get) => $get('doc_user_attachment_3_mode') === 'text'),
+                    ])->columnSpan(1),
+                ]),
         ]);
     }
 

@@ -375,7 +375,9 @@
 
                     <tbody>
                         @foreach ($this->employees as $i => $emp)
-                            <tr class="{{ $i % 2 === 0 ? 'ma-row-even' : 'ma-row-odd' }}">
+                            <tr  wire:key="emp-{{ $emp['id'] }}" 
+                            x-data="{ rowStatus: '{{ $emp['is_marked'] ? $emp['status'] : '' }}' }"
+                            class="{{ $i % 2 === 0 ? 'ma-row-even' : 'ma-row-odd' }}">
 
                                 {{-- # --}}
                                 <td class="ma-td-num">{{ $i + 1 }}</td>

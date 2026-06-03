@@ -180,10 +180,17 @@ class MarkAttendance extends Page implements HasForms
                 $skipped++;
                 continue;
             }
-
+        
             $status = AttendanceStatus::from($data['status']);
-            $ot     = $status->allowsOvertime() ? (float) ($data['overtime_hours'] ?? 0) : 0.00;
-
+            $enteredOt = (float) ($data['overtime_hours'] ?? 0);
+        
+            // AUTO-CORRECT: If they typed OT hours but forgot to select the Overtime status, fix it for them.
+            if ($enteredOt > 0 && ! $status->allowsOvertime()) {
+                $status = AttendanceStatus::PresentWithOT; 
+            }
+        
+            $ot = $status->allowsOvertime() ? $enteredOt : 0.00;
+        
             AttendanceRecord::updateOrCreate(
                 [
                     'employee_id' => (int) $employeeId,
@@ -197,7 +204,7 @@ class MarkAttendance extends Page implements HasForms
                     'marked_by'      => auth()->id(),
                 ]
             );
-
+        
             $saved++;
         }
 
