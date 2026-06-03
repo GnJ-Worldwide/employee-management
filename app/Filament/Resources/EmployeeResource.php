@@ -1175,6 +1175,15 @@ class EmployeeResource extends Resource
 
         ]);
     }
+    // ──────────────────────────────────────────────────────────────────────────
+    //  Ledger
+    // ──────────────────────────────────────────────────────────────────────────
+    public static function getRelations(): array
+    {
+        return [
+            \App\Filament\Resources\EmployeeResource\RelationManagers\LedgerTransactionsRelationManager::class,
+        ];
+    }
 
     // ──────────────────────────────────────────────────────────────────────────
     //  PAGES

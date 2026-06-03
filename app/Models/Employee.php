@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\ValidationException;
+use App\Models\LedgerTransaction;
 
 class Employee extends Model
 {
@@ -183,6 +184,12 @@ class Employee extends Model
     {
         return $this->engagement_status === 'Available';
     }
+
+    public function ledgerTransactions()
+    {
+        return $this->hasMany(LedgerTransaction::class);
+    }
+
 
     // ── Business Logic ─────────────────────────────────────────────────────
 

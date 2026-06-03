@@ -49,6 +49,10 @@ class Contract extends Model
     {
         return $this->belongsTo(Client::class);
     }
+    public function ledgerTransactions()
+    {
+        return $this->hasMany(LedgerTransaction::class);
+    }
 
     // ── Helpers ────────────────────────────────────────────────────────────
 
