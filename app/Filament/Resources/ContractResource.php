@@ -117,19 +117,7 @@ class ContractResource extends Resource
                                 ->searchable()
                                 ->preload()
                                 ->required()
-                                ->columnSpanFull()
-                                ->createOptionForm([
-                                    Forms\Components\TextInput::make('name')->required(),
-                                    Forms\Components\TextInput::make('gst_no')->maxLength(15),
-                                    Forms\Components\TextInput::make('mobile')->tel(),
-                                    Forms\Components\Textarea::make('address')->rows(2),
-                                ])
-                                ->editOptionForm([
-                                    Forms\Components\TextInput::make('name')->required(),
-                                    Forms\Components\TextInput::make('gst_no')->maxLength(15),
-                                    Forms\Components\TextInput::make('mobile')->tel(),
-                                    Forms\Components\Textarea::make('address')->rows(2),
-                                ]),
+                                ->columnSpanFull(),
                         ]),
 
                     // ── Tab 3: Client Details ──────────────────────────────
@@ -142,19 +130,7 @@ class ContractResource extends Resource
                                 ->searchable()
                                 ->preload()
                                 ->required()
-                                ->columnSpanFull()
-                                ->createOptionForm([
-                                    Forms\Components\TextInput::make('name')->required(),
-                                    Forms\Components\TextInput::make('gst_no')->maxLength(15),
-                                    Forms\Components\TextInput::make('mobile')->tel(),
-                                    Forms\Components\Textarea::make('address')->rows(2),
-                                ])
-                                ->editOptionForm([
-                                    Forms\Components\TextInput::make('name')->required(),
-                                    Forms\Components\TextInput::make('gst_no')->maxLength(15),
-                                    Forms\Components\TextInput::make('mobile')->tel(),
-                                    Forms\Components\Textarea::make('address')->rows(2),
-                                ]),
+                                ->columnSpanFull(),
                         ]),
 
                     // // ── Tab 4: Foundational Documents ─────────────────────
