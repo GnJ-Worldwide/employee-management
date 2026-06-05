@@ -22,7 +22,7 @@ class SiteEngagementResource extends Resource
     protected static ?string $navigationIcon     = 'heroicon-o-map-pin';
     protected static ?string $navigationLabel    = 'Site Engagement';
     protected static ?string $navigationGroup    = 'Business Operations';
-    protected static ?int    $navigationSort     = 3;
+    protected static ?int    $navigationSort     = 5;
     protected static ?string $slug               = 'site-engagements';
     protected static ?string $recordTitleAttribute = 'full_name';
 
